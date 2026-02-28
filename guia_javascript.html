@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Guia de JavaScript - 120+ Métodos | Referência Profissional">
+<meta name="theme-color" content="#F7DF1E">
+<title>⚡ Guia de JavaScript</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-gradient(135deg,#FFD700 0%,#FFA500 100%);min-height:100vh;padding:20px;color:#2c3e50}
+.container{max-width:1200px;margin:0 auto;background:white;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,0.3);overflow:hidden}
+.header{padding:50px;background:linear-gradient(135deg,#F7DF1E 0%,#FF8C00 100%);color:#333;text-align:center}
+.header h1{font-size:3em;margin-bottom:10px;font-weight:800;text-shadow:2px 2px 4px rgba(0,0,0,0.1)}
+.header p{font-size:1.2em;opacity:0.95;font-weight:300;color:#333}
+.content{padding:40px}
+.search-box{margin-bottom:30px}
+.search-box input{width:100%;padding:15px 20px;font-size:1em;border:2px solid #e0e0e0;border-radius:10px;transition:all 0.3s;background:#f8f9fa}
+.search-box input:focus{outline:none;border-color:#F7DF1E;box-shadow:0 0 15px rgba(247,223,30,0.3);background:white}
+.section{margin-bottom:50px}
+.section-title{font-size:1.8em;font-weight:700;padding:15px 25px;border-radius:10px;color:white;margin-bottom:25px;text-transform:uppercase;letter-spacing:1px;box-shadow:0 8px 20px rgba(0,0,0,0.15)}
+.section:nth-child(1) .section-title{background:linear-gradient(135deg,#E74C3C 0%,#FF6B6B 100%)}
+.section:nth-child(2) .section-title{background:linear-gradient(135deg,#3498DB 0%,#5DADE2 100%)}
+.section:nth-child(3) .section-title{background:linear-gradient(135deg,#2ECC71 0%,#58D68D 100%)}
+.section:nth-child(4) .section-title{background:linear-gradient(135deg,#9B59B6 0%,#BB8FCE 100%)}
+.section:nth-child(5) .section-title{background:linear-gradient(135deg,#F39C12 0%,#F8B739 100%)}
+.section:nth-child(6) .section-title{background:linear-gradient(135deg,#1ABC9C 0%,#48C9B0 100%)}
+.section:nth-child(7) .section-title{background:linear-gradient(135deg,#E67E22 0%,#EC7063 100%)}
+.section:nth-child(8) .section-title{background:linear-gradient(135deg,#34495E 0%,#566573 100%)}
+table{width:100%;border-collapse:collapse;margin-bottom:20px;background:white;border-radius:10px;overflow:hidden;box-shadow:0 4px 6px rgba(0,0,0,0.1)}
+th{background:linear-gradient(135deg,#2c3e50 0%,#34495E 100%);color:white;padding:15px;text-align:left;font-weight:600;font-size:0.95em}
+td{padding:12px 15px;border-bottom:1px solid #ecf0f1;font-size:0.9em;vertical-align:top}
+tr:hover{background-color:#f8f9fa;transform:scale(1.01);transition:all 0.3s}
+code{background:#f4f4f4;padding:2px 6px;border-radius:4px;font-family:'Courier New',monospace;color:#c7254e}
+.footer{padding:30px;background:#f8f9fa;text-align:center;border-top:1px solid #ecf0f1;font-size:0.85em;color:#7f8c8d}
+.footer strong{color:#2c3e50}
+.exclusive-banner{background:linear-gradient(135deg,#FF0000 0%,#CC0000 100%);color:white;padding:15px 25px;border-radius:8px;margin-bottom:30px;font-weight:600;text-align:center;box-shadow:0 4px 10px rgba(255,0,0,0.3)}
+.responsive{display:block}
+@media(max-width:768px){
+body{padding:10px}
+.header{padding:30px 15px}
+.header h1{font-size:2em}
+.content{padding:20px 15px}
+.section-title{font-size:1.3em;padding:12px 15px}
+td,th{padding:8px 10px;font-size:0.8em}
+}
+</style>
+</head>
+<body>
+<!-- PROTEÇÃO COM SENHA -->
+<div id="passwordOverlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #2c3e50 0%, #34495E 100%); display: flex; align-items: center; justify-content: center; z-index: 9999;">
+  <div style="background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); text-align: center; max-width: 400px; width: 90%;">
+    <h2 style="color: #2c3e50; margin-bottom: 10px; font-size: 1.8em;">🔒 Acesso Protegido</h2>
+    <p style="color: #7f8c8d; margin-bottom: 30px; font-size: 0.95em;">Este guia é exclusivo. Digite a senha para acessar.</p>
+
+    <input type="password" id="passwordInput" placeholder="Digite a senha..." style="width: 100%; padding: 12px 15px; font-size: 1em; border: 2px solid #e0e0e0; border-radius: 8px; margin-bottom: 15px; transition: all 0.3s; box-sizing: border-box;" onkeypress="if(event.key==='Enter') verificarSenha()">
+
+    <button onclick="verificarSenha()" style="width: 100%; padding: 12px; background: linear-gradient(135deg, #3498DB 0%, #2980B9 100%); color: white; border: none; border-radius: 8px; font-size: 1em; font-weight: 600; cursor: pointer; transition: all 0.3s;">Acessar</button>
+
+    <p id="mensagemErro" style="color: #E74C3C; margin-top: 15px; display: none; font-size: 0.9em;">❌ Senha incorreta! Tente novamente.</p>
+  </div>
+</div>
+
+<script>
+const SENHA_CORRETA = "Tech475869";
+
+function verificarSenha() {
+  const senhaDigitada = document.getElementById('passwordInput').value;
+
+  if (senhaDigitada === SENHA_CORRETA) {
+    // Senha correta - ocultar overlay
+    document.getElementById('passwordOverlay').style.display = 'none';
+    // Armazenar no sessionStorage para evitar solicitar novamente na mesma sessão
+    sessionStorage.setItem('acessoAutorizado', 'true');
+  } else {
+    // Senha incorreta - mostrar erro
+    document.getElementById('mensagemErro').style.display = 'block';
+    document.getElementById('passwordInput').value = '';
+    document.getElementById('passwordInput').focus();
+  }
+}
+
+// Verificar se já tem acesso autorizado
+window.addEventListener('load', function() {
+  if (sessionStorage.getItem('acessoAutorizado') === 'true') {
+    document.getElementById('passwordOverlay').style.display = 'none';
+  } else {
+    document.getElementById('passwordInput').focus();
+  }
+});
+</script>
+
+
+<div class="container">
+<div class="header">
+<h1>⚡ Guia de JavaScript</h1>
+<p>120+ Métodos, Funções e Referências Essenciais</p>
+</div>
+<div class="content">
+<div class="exclusive-banner">
+🔒 ARQUIVO EXCLUSIVO - Distribuição proibida. Uso pessoal apenas.
+</div>
+<div class="search-box">
+<input type="text" id="search" placeholder="🔍 Digite para buscar (ex: addEventListener, map, fetch)..." onkeyup="filterTable()">
+</div>
+
+<div class="section">
+<h2 class="section-title">1. Métodos de String (15 métodos)</h2>
+<table id="table-strings">
+<thead>
+<tr><th>Método</th><th>Descrição</th><th>Exemplo</th></tr>
+</thead>
+<tbody>
+<tr><td>charAt()</td><td>Retorna caractere no índice</td><td><code>str.charAt(0)</code></td></tr>
+<tr><td>charCodeAt()</td><td>Retorna código Unicode do caractere</td><td><code>str.charCodeAt(0)</code></td></tr>
+<tr><td>concat()</td><td>Concatena strings</td><td><code>str1.concat(str2)</code></td></tr>
+<tr><td>includes()</td><td>Verifica se contém substring</td><td><code>str.includes('texto')</code></td></tr>
+<tr><td>indexOf()</td><td>Retorna índice da primeira ocorrência</td><td><code>str.indexOf('a')</code></td></tr>
+<tr><td>lastIndexOf()</td><td>Retorna índice da última ocorrência</td><td><code>str.lastIndexOf('a')</code></td></tr>
+<tr><td>slice()</td><td>Extrai parte da string</td><td><code>str.slice(0, 5)</code></td></tr>
+<tr><td>substring()</td><td>Extrai substring entre índices</td><td><code>str.substring(0, 5)</code></td></tr>
+<tr><td>toLowerCase()</td><td>Converte para minúsculas</td><td><code>str.toLowerCase()</code></td></tr>
+<tr><td>toUpperCase()</td><td>Converte para maiúsculas</td><td><code>str.toUpperCase()</code></td></tr>
+<tr><td>trim()</td><td>Remove espaços em branco</td><td><code>str.trim()</code></td></tr>
+<tr><td>split()</td><td>Divide string em array</td><td><code>str.split(',')</code></td></tr>
+<tr><td>replace()</td><td>Substitui primeira ocorrência</td><td><code>str.replace('a', 'b')</code></td></tr>
+<tr><td>replaceAll()</td><td>Substitui todas as ocorrências</td><td><code>str.replaceAll('a', 'b')</code></td></tr>
+<tr><td>startsWith()</td><td>Verifica se inicia com substring</td><td><code>str.startsWith('Hello')</code></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="section">
+<h2 class="section-title">2. Métodos de Array (18 métodos)</h2>
+<table id="table-arrays">
+<thead>
+<tr><th>Método</th><th>Descrição</th><th>Exemplo</th></tr>
+</thead>
+<tbody>
+<tr><td>push()</td><td>Adiciona elemento no final</td><td><code>arr.push(5)</code></td></tr>
+<tr><td>pop()</td><td>Remove elemento do final</td><td><code>arr.pop()</code></td></tr>
+<tr><td>shift()</td><td>Remove elemento do início</td><td><code>arr.shift()</code></td></tr>
+<tr><td>unshift()</td><td>Adiciona elemento no início</td><td><code>arr.unshift(0)</code></td></tr>
+<tr><td>slice()</td><td>Copia parte do array</td><td><code>arr.slice(1, 3)</code></td></tr>
+<tr><td>splice()</td><td>Remove/adiciona elementos</td><td><code>arr.splice(1, 1, 'novo')</code></td></tr>
+<tr><td>indexOf()</td><td>Encontra índice do elemento</td><td><code>arr.indexOf(5)</code></td></tr>
+<tr><td>includes()</td><td>Verifica se contém elemento</td><td><code>arr.includes(5)</code></td></tr>
+<tr><td>join()</td><td>Junta elementos em string</td><td><code>arr.join(', ')</code></td></tr>
+<tr><td>reverse()</td><td>Inverte array</td><td><code>arr.reverse()</code></td></tr>
+<tr><td>sort()</td><td>Ordena array</td><td><code>arr.sort((a, b) => a - b)</code></td></tr>
+<tr><td>forEach()</td><td>Itera sobre cada elemento</td><td><code>arr.forEach(x => console.log(x))</code></td></tr>
+<tr><td>map()</td><td>Transforma elementos</td><td><code>arr.map(x => x * 2)</code></td></tr>
+<tr><td>filter()</td><td>Filtra elementos</td><td><code>arr.filter(x => x > 5)</code></td></tr>
+<tr><td>reduce()</td><td>Reduz array a um valor</td><td><code>arr.reduce((acc, x) => acc + x, 0)</code></td></tr>
+<tr><td>find()</td><td>Encontra primeiro elemento</td><td><code>arr.find(x => x > 5)</code></td></tr>
+<tr><td>findIndex()</td><td>Encontra índice do elemento</td><td><code>arr.findIndex(x => x > 5)</code></td></tr>
+<tr><td>some()</td><td>Verifica se algum passa no teste</td><td><code>arr.some(x => x > 5)</code></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="section">
+<h2 class="section-title">3. Métodos de Objeto (14 métodos)</h2>
+<table id="table-objects">
+<thead>
+<tr><th>Método</th><th>Descrição</th><th>Exemplo</th></tr>
+</thead>
+<tbody>
+<tr><td>Object.keys()</td><td>Retorna array de chaves</td><td><code>Object.keys(obj)</code></td></tr>
+<tr><td>Object.values()</td><td>Retorna array de valores</td><td><code>Object.values(obj)</code></td></tr>
+<tr><td>Object.entries()</td><td>Retorna array [chave, valor]</td><td><code>Object.entries(obj)</code></td></tr>
+<tr><td>Object.assign()</td><td>Copia propriedades de objeto</td><td><code>Object.assign({}, obj)</code></td></tr>
+<tr><td>Object.create()</td><td>Cria novo objeto</td><td><code>Object.create(prototype)</code></td></tr>
+<tr><td>Object.defineProperty()</td><td>Define propriedade</td><td><code>Object.defineProperty(obj, 'prop', {value: 10})</code></td></tr>
+<tr><td>hasOwnProperty()</td><td>Verifica se tem propriedade</td><td><code>obj.hasOwnProperty('prop')</code></td></tr>
+<tr><td>Object.freeze()</td><td>Congela objeto</td><td><code>Object.freeze(obj)</code></td></tr>
+<tr><td>Object.seal()</td><td>Sela objeto</td><td><code>Object.seal(obj)</code></td></tr>
+<tr><td>Object.is()</td><td>Compara valores</td><td><code>Object.is(1, 1)</code></td></tr>
+<tr><td>JSON.stringify()</td><td>Converte para JSON</td><td><code>JSON.stringify(obj)</code></td></tr>
+<tr><td>JSON.parse()</td><td>Converte JSON para objeto</td><td><code>JSON.parse('{"a":1}')</code></td></tr>
+<tr><td>Object.getOwnPropertyNames()</td><td>Lista todas as propriedades</td><td><code>Object.getOwnPropertyNames(obj)</code></td></tr>
+<tr><td>Object.getPrototypeOf()</td><td>Obtém protótipo</td><td><code>Object.getPrototypeOf(obj)</code></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="section">
+<h2 class="section-title">4. Métodos de DOM (16 métodos)</h2>
+<table id="table-dom">
+<thead>
+<tr><th>Método</th><th>Descrição</th><th>Exemplo</th></tr>
+</thead>
+<tbody>
+<tr><td>getElementById()</td><td>Seleciona por ID</td><td><code>document.getElementById('id')</code></td></tr>
+<tr><td>querySelector()</td><td>Seleciona com CSS selector</td><td><code>document.querySelector('.class')</code></td></tr>
+<tr><td>querySelectorAll()</td><td>Seleciona múltiplos elementos</td><td><code>document.querySelectorAll('div')</code></td></tr>
+<tr><td>getElementsByClassName()</td><td>Seleciona por classe</td><td><code>document.getElementsByClassName('class')</code></td></tr>
+<tr><td>getElementsByTagName()</td><td>Seleciona por tag</td><td><code>document.getElementsByTagName('div')</code></td></tr>
+<tr><td>createElement()</td><td>Cria novo elemento</td><td><code>document.createElement('div')</code></td></tr>
+<tr><td>appendChild()</td><td>Adiciona elemento filho</td><td><code>parent.appendChild(child)</code></td></tr>
+<tr><td>removeChild()</td><td>Remove elemento filho</td><td><code>parent.removeChild(child)</code></td></tr>
+<tr><td>insertBefore()</td><td>Insere antes de elemento</td><td><code>parent.insertBefore(novo, elemento)</code></td></tr>
+<tr><td>addEventListener()</td><td>Adiciona event listener</td><td><code>el.addEventListener('click', fn)</code></td></tr>
+<tr><td>removeEventListener()</td><td>Remove event listener</td><td><code>el.removeEventListener('click', fn)</code></td></tr>
+<tr><td>classList.add()</td><td>Adiciona classe CSS</td><td><code>el.classList.add('ativa')</code></td></tr>
+<tr><td>classList.remove()</td><td>Remove classe CSS</td><td><code>el.classList.remove('ativa')</code></td></tr>
+<tr><td>getAttribute()</td><td>Obtém atributo</td><td><code>el.getAttribute('href')</code></td></tr>
+<tr><td>setAttribute()</td><td>Define atributo</td><td><code>el.setAttribute('href', '/link')</code></td></tr>
+<tr><td>innerHTML</td><td>Define HTML interno</td><td><code>el.innerHTML = '<p>Texto</p>'</code></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="section">
+<h2 class="section-title">5. Métodos de Math (12 métodos)</h2>
+<table id="table-math">
+<thead>
+<tr><th>Método</th><th>Descrição</th><th>Exemplo</th></tr>
+</thead>
+<tbody>
+<tr><td>Math.abs()</td><td>Valor absoluto</td><td><code>Math.abs(-5) // 5</code></td></tr>
+<tr><td>Math.round()</td><td>Arredonda para inteiro</td><td><code>Math.round(4.7) // 5</code></td></tr>
+<tr><td>Math.floor()</td><td>Arredonda para baixo</td><td><code>Math.floor(4.9) // 4</code></td></tr>
+<tr><td>Math.ceil()</td><td>Arredonda para cima</td><td><code>Math.ceil(4.1) // 5</code></td></tr>
+<tr><td>Math.pow()</td><td>Potência</td><td><code>Math.pow(2, 3) // 8</code></td></tr>
+<tr><td>Math.sqrt()</td><td>Raiz quadrada</td><td><code>Math.sqrt(16) // 4</code></td></tr>
+<tr><td>Math.max()</td><td>Máximo valor</td><td><code>Math.max(1, 5, 3) // 5</code></td></tr>
+<tr><td>Math.min()</td><td>Mínimo valor</td><td><code>Math.min(1, 5, 3) // 1</code></td></tr>
+<tr><td>Math.random()</td><td>Número aleatório 0-1</td><td><code>Math.random()</code></td></tr>
+<tr><td>Math.sin()</td><td>Seno em radianos</td><td><code>Math.sin(Math.PI / 2) // 1</code></td></tr>
+<tr><td>Math.cos()</td><td>Cosseno em radianos</td><td><code>Math.cos(0) // 1</code></td></tr>
+<tr><td>Math.tan()</td><td>Tangente em radianos</td><td><code>Math.tan(Math.PI / 4) // 1</code></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="section">
+<h2 class="section-title">6. Métodos de Date (14 métodos)</h2>
+<table id="table-date">
+<thead>
+<tr><th>Método</th><th>Descrição</th><th>Exemplo</th></tr>
+</thead>
+<tbody>
+<tr><td>new Date()</td><td>Cria novo objeto Date</td><td><code>new Date()</code></td></tr>
+<tr><td>getFullYear()</td><td>Obtém ano</td><td><code>date.getFullYear()</code></td></tr>
+<tr><td>getMonth()</td><td>Obtém mês (0-11)</td><td><code>date.getMonth()</code></td></tr>
+<tr><td>getDate()</td><td>Obtém dia do mês</td><td><code>date.getDate()</code></td></tr>
+<tr><td>getDay()</td><td>Obtém dia da semana (0-6)</td><td><code>date.getDay()</code></td></tr>
+<tr><td>getHours()</td><td>Obtém horas</td><td><code>date.getHours()</code></td></tr>
+<tr><td>getMinutes()</td><td>Obtém minutos</td><td><code>date.getMinutes()</code></td></tr>
+<tr><td>getSeconds()</td><td>Obtém segundos</td><td><code>date.getSeconds()</code></td></tr>
+<tr><td>getTime()</td><td>Obtém timestamp</td><td><code>date.getTime()</code></td></tr>
+<tr><td>setFullYear()</td><td>Define ano</td><td><code>date.setFullYear(2025)</code></td></tr>
+<tr><td>setMonth()</td><td>Define mês</td><td><code>date.setMonth(11)</code></td></tr>
+<tr><td>setDate()</td><td>Define dia</td><td><code>date.setDate(25)</code></td></tr>
+<tr><td>toLocaleDateString()</td><td>Data formatada</td><td><code>date.toLocaleDateString('pt-BR')</code></td></tr>
+<tr><td>Date.now()</td><td>Timestamp atual</td><td><code>Date.now()</code></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="section">
+<h2 class="section-title">7. Métodos de Promise/Async (12 métodos)</h2>
+<table id="table-promise">
+<thead>
+<tr><th>Método</th><th>Descrição</th><th>Exemplo</th></tr>
+</thead>
+<tbody>
+<tr><td>Promise.resolve()</td><td>Promise resolvida</td><td><code>Promise.resolve(valor)</code></td></tr>
+<tr><td>Promise.reject()</td><td>Promise rejeitada</td><td><code>Promise.reject(erro)</code></td></tr>
+<tr><td>.then()</td><td>Trata sucesso</td><td><code>promise.then(fn)</code></td></tr>
+<tr><td>.catch()</td><td>Trata erro</td><td><code>promise.catch(fn)</code></td></tr>
+<tr><td>.finally()</td><td>Executa sempre</td><td><code>promise.finally(fn)</code></td></tr>
+<tr><td>Promise.all()</td><td>Aguarda todas</td><td><code>Promise.all([p1, p2])</code></td></tr>
+<tr><td>Promise.race()</td><td>Primeira resolvida</td><td><code>Promise.race([p1, p2])</code></td></tr>
+<tr><td>Promise.allSettled()</td><td>Aguarda todas (com status)</td><td><code>Promise.allSettled([p1, p2])</code></td></tr>
+<tr><td>Promise.any()</td><td>Primeira bem-sucedida</td><td><code>Promise.any([p1, p2])</code></td></tr>
+<tr><td>async function</td><td>Função assíncrona</td><td><code>async function fn() { }</code></td></tr>
+<tr><td>await</td><td>Aguarda Promise</td><td><code>await promise</code></td></tr>
+<tr><td>setTimeout()</td><td>Executa após delay</td><td><code>setTimeout(fn, 1000)</code></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="section">
+<h2 class="section-title">8. Expressões Regulares (14 métodos)</h2>
+<table id="table-regex">
+<thead>
+<tr><th>Método</th><th>Descrição</th><th>Exemplo</th></tr>
+</thead>
+<tbody>
+<tr><td>new RegExp()</td><td>Cria regex</td><td><code>new RegExp('padrão', 'g')</code></td></tr>
+<tr><td>/padrão/</td><td>Literal regex</td><td><code>/\d+/g</code></td></tr>
+<tr><td>.test()</td><td>Testa padrão</td><td><code>regex.test('123')</code></td></tr>
+<tr><td>.exec()</td><td>Executa regex</td><td><code>regex.exec('texto')</code></td></tr>
+<tr><td>.match()</td><td>Encontra correspondências</td><td><code>str.match(/\d+/g)</code></td></tr>
+<tr><td>.replace()</td><td>Substitui com regex</td><td><code>str.replace(/a/g, 'b')</code></td></tr>
+<tr><td>.search()</td><td>Encontra índice</td><td><code>str.search(/\d+/)</code></td></tr>
+<tr><td>.split()</td><td>Divide com regex</td><td><code>str.split(/,/)</code></td></tr>
+<tr><td>\d</td><td>Dígito [0-9]</td><td><code>/\d+/</code></td></tr>
+<tr><td>\w</td><td>Alfanumérico [a-zA-Z0-9_]</td><td><code>/\w+/</code></td></tr>
+<tr><td>\s</td><td>Espaço em branco</td><td><code>/\s+/</code></td></tr>
+<tr><td>[abc]</td><td>Caracteres a, b, c</td><td><code>/[aeiou]/</code></td></tr>
+<tr><td>[^abc]</td><td>Não a, não b, não c</td><td><code>/[^0-9]/</code></td></tr>
+<tr><td>^padrão</td><td>Inicia com padrão</td><td><code>/^https:/</code></td></tr>
+</tbody>
+</table>
+</div>
+
+</div>
+
+<div class="footer">
+<strong>🔒 ARQUIVO EXCLUSIVO</strong> | Desenvolvido por <strong> © 2026 Julia Correia de Oliveira. Todos os direitos reservados.</strong> | Versão 1.0 Professional Edition<br>
+Data: 28 de Fevereiro de 2026 | Licenciado para uso individual. O compartilhamento não autorizado poderá resultar no bloqueio de acesso. .
+</div>
+</div>
+
+<script>
+function filterTable() {
+  const searchInput = document.getElementById('search').value.toLowerCase();
+  const tables = document.querySelectorAll('table');
+
+  tables.forEach(table => {
+    const rows = table.querySelectorAll('tbody tr');
+    rows.forEach(row => {
+      const text = row.textContent.toLowerCase();
+      row.style.display = text.includes(searchInput) ? '' : 'none';
+    });
+  });
+}
+</script>
+<script>
+const params = new URLSearchParams(window.location.search);
+const nome = params.get("nome");
+
+if (nome) {
+  const aviso = document.createElement("div");
+  aviso.innerHTML = "ARQUIVO LICENCIADO PARA: " + nome + " | Uso individual.";
+  
+  aviso.style.position = "fixed";
+  aviso.style.top = "0";
+  aviso.style.left = "0";
+  aviso.style.width = "100%";
+  aviso.style.background = "linear-gradient(135deg, #E74C3C 0%,#764ba2 100%)";
+  aviso.style.color = "#fff";
+  aviso.style.padding = "12px";
+  aviso.style.textAlign = "center";
+  aviso.style.fontWeight = "bold";
+  aviso.style.zIndex = "9999";
+  aviso.style.boxShadow = "0 4px 10px rgba(0,0,0,0.2)";
+  
+  document.body.style.paddingTop = "60px";
+  document.body.prepend(aviso);
+}
+</script>
+
+</body>
+</html>
