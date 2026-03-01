@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Guia de HTML5 - 110+ Elementos | Referência Profissional">
+<meta name="theme-color" content="#E34C26">
+<title>📄 Guia de HTML5</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-gradient(135deg,#E34C26 0%,#FF6B35 100%);min-height:100vh;padding:20px;color:#2c3e50}
+.container{max-width:1200px;margin:0 auto;background:white;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,0.3);overflow:hidden}
+.header{padding:50px;background:linear-gradient(135deg,#E34C26 0%,#FF8C42 100%);color:white;text-align:center}
+.header h1{font-size:3em;margin-bottom:10px;font-weight:800;text-shadow:2px 2px 4px rgba(0,0,0,0.2)}
+.header p{font-size:1.2em;opacity:0.95;font-weight:300}
+.content{padding:40px}
+.search-box{margin-bottom:30px}
+.search-box input{width:100%;padding:15px 20px;font-size:1em;border:2px solid #e0e0e0;border-radius:10px;transition:all 0.3s;background:#f8f9fa}
+.search-box input:focus{outline:none;border-color:#E34C26;box-shadow:0 0 15px rgba(227,76,38,0.3);background:white}
+.section{margin-bottom:50px}
+.section-title{font-size:1.8em;font-weight:700;padding:15px 25px;border-radius:10px;color:white;margin-bottom:25px;text-transform:uppercase;letter-spacing:1px;box-shadow:0 8px 20px rgba(0,0,0,0.15)}
+.section:nth-child(1) .section-title{background:linear-gradient(135deg,#E34C26 0%,#FF6B35 100%)}
+.section:nth-child(2) .section-title{background:linear-gradient(135deg,#F16529 0%,#FF8C42 100%)}
+.section:nth-child(3) .section-title{background:linear-gradient(135deg,#FFA500 0%,#FFB84D 100%)}
+.section:nth-child(4) .section-title{background:linear-gradient(135deg,#FF7043 0%,#FF8A65 100%)}
+.section:nth-child(5) .section-title{background:linear-gradient(135deg,#FF5722 0%,#FF7043 100%)}
+.section:nth-child(6) .section-title{background:linear-gradient(135deg,#E64A19 0%,#FF6B35 100%)}
+.section:nth-child(7) .section-title{background:linear-gradient(135deg,#D84315 0%,#FF5722 100%)}
+.section:nth-child(8) .section-title{background:linear-gradient(135deg,#BF360C 0%,#E64A19 100%)}
+table{width:100%;border-collapse:collapse;margin-bottom:20px;background:white;border-radius:10px;overflow:hidden;box-shadow:0 4px 6px rgba(0,0,0,0.1)}
+th{background:linear-gradient(135deg,#2c3e50 0%,#34495E 100%);color:white;padding:15px;text-align:left;font-weight:600;font-size:0.95em}
+td{padding:12px 15px;border-bottom:1px solid #ecf0f1;font-size:0.9em;vertical-align:top}
+tr:hover{background-color:#f8f9fa;transform:scale(1.01);transition:all 0.3s}
+code{background:#f4f4f4;padding:2px 6px;border-radius:4px;font-family:'Courier New',monospace;color:#c7254e}
+.footer{padding:30px;background:#f8f9fa;text-align:center;border-top:1px solid #ecf0f1;font-size:0.85em;color:#7f8c8d}
+.footer strong{color:#2c3e50}
+.exclusive-banner{background:linear-gradient(135deg,#FF0000 0%,#CC0000 100%);color:white;padding:15px 25px;border-radius:8px;margin-bottom:30px;font-weight:600;text-align:center;box-shadow:0 4px 10px rgba(255,0,0,0.3)}
+.responsive{display:block}
+@media(max-width:768px){
+body{padding:10px}
+.header{padding:30px 15px}
+.header h1{font-size:2em}
+.content{padding:20px 15px}
+.section-title{font-size:1.3em;padding:12px 15px}
+td,th{padding:8px 10px;font-size:0.8em}
+}
+</style>
+</head>
+<body>
+<!-- PROTEÇÃO COM SENHA -->
+<div id="passwordOverlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #2c3e50 0%, #34495E 100%); display: flex; align-items: center; justify-content: center; z-index: 9999;">
+  <div style="background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); text-align: center; max-width: 400px; width: 90%;">
+    <h2 style="color: #2c3e50; margin-bottom: 10px; font-size: 1.8em;">🔒 Acesso Protegido</h2>
+    <p style="color: #7f8c8d; margin-bottom: 30px; font-size: 0.95em;">Este guia é exclusivo. Digite a senha para acessar.</p>
+
+    <input type="password" id="passwordInput" placeholder="Digite a senha..." style="width: 100%; padding: 12px 15px; font-size: 1em; border: 2px solid #e0e0e0; border-radius: 8px; margin-bottom: 15px; transition: all 0.3s; box-sizing: border-box;" onkeypress="if(event.key==='Enter') verificarSenha()">
+
+    <button onclick="verificarSenha()" style="width: 100%; padding: 12px; background: linear-gradient(135deg, #3498DB 0%, #2980B9 100%); color: white; border: none; border-radius: 8px; font-size: 1em; font-weight: 600; cursor: pointer; transition: all 0.3s;">Acessar</button>
+
+    <p id="mensagemErro" style="color: #E74C3C; margin-top: 15px; display: none; font-size: 0.9em;">❌ Senha incorreta! Tente novamente.</p>
+  </div>
+</div>
+
+<script>
+const SENHA_CORRETA = "Tech475869";
+
+function verificarSenha() {
+  const senhaDigitada = document.getElementById('passwordInput').value;
+
+  if (senhaDigitada === SENHA_CORRETA) {
+    // Senha correta - ocultar overlay
+    document.getElementById('passwordOverlay').style.display = 'none';
+    // Armazenar no sessionStorage para evitar solicitar novamente na mesma sessão
+    sessionStorage.setItem('acessoAutorizado', 'true');
+  } else {
+    // Senha incorreta - mostrar erro
+    document.getElementById('mensagemErro').style.display = 'block';
+    document.getElementById('passwordInput').value = '';
+    document.getElementById('passwordInput').focus();
+  }
+}
+
+// Verificar se já tem acesso autorizado
+window.addEventListener('load', function() {
+  if (sessionStorage.getItem('acessoAutorizado') === 'true') {
+    document.getElementById('passwordOverlay').style.display = 'none';
+  } else {
+    document.getElementById('passwordInput').focus();
+  }
+});
+</script>
+
+
+<div class="container">
+<div class="header">
+<h1>📄 Guia de HTML5</h1>
+<p>110+ Elementos Modernos e Referências Essenciais</p>
+</div>
+<div class="content">
+<div class="exclusive-banner">
+🔒 ARQUIVO EXCLUSIVO - Distribuição proibida. Uso pessoal apenas.
+</div>
+<div class="search-box">
+<input type="text" id="search" placeholder="🔍 Digite para buscar (ex: header, form, video, canvas)..." onkeyup="filterTable()">
+</div>
+
+<div class="section">
+<h2 class="section-title">1. Estrutura Básica (12 elementos)</h2>
+<table id="table-structure">
+<thead>
+<tr><th>Elemento</th><th>Descrição</th><th>Exemplo</th></tr>
+</thead>
+<tbody>
+<tr><td>&lt;html&gt;</td><td>Raiz do documento</td><td><code>&lt;html lang="pt"&gt;</code></td></tr>
+<tr><td>&lt;head&gt;</td><td>Metadados e configuração</td><td><code>&lt;head&gt;...&lt;/head&gt;</code></td></tr>
+<tr><td>&lt;body&gt;</td><td>Corpo da página</td><td><code>&lt;body&gt;...&lt;/body&gt;</code></td></tr>
+<tr><td>&lt;title&gt;</td><td>Título da página</td><td><code>&lt;title&gt;Meu Site&lt;/title&gt;</code></td></tr>
+<tr><td>&lt;meta&gt;</td><td>Metadados (charset, viewport)</td><td><code>&lt;meta charset="UTF-8"&gt;</code></td></tr>
+<tr><td>&lt;link&gt;</td><td>Vincula recursos externos</td><td><code>&lt;link rel="stylesheet" href="style.css"&gt;</code></td></tr>
+<tr><td>&lt;style&gt;</td><td>CSS interno</td><td><code>&lt;style&gt;body{...}&lt;/style&gt;</code></td></tr>
+<tr><td>&lt;script&gt;</td><td>JavaScript</td><td><code>&lt;script src="app.js"&gt;&lt;/script&gt;</code></td></tr>
+<tr><td>&lt;noscript&gt;</td><td>Fallback sem JavaScript</td><td><code>&lt;noscript&gt;JS desativado&lt;/noscript&gt;</code></td></tr>
+<tr><td>&lt;base&gt;</td><td>URL base do documento</td><td><code>&lt;base href="https://example.com"&gt;</code></td></tr>
+<tr><td>&lt;iframe&gt;</td><td>Frame embutido</td><td><code>&lt;iframe src="page.html"&gt;&lt;/iframe&gt;</code></td></tr>
+<tr><td>&lt;template&gt;</td><td>Template HTML reutilizável</td><td><code>&lt;template id="t"&gt;...&lt;/template&gt;</code></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="section">
+<h2 class="section-title">2. Texto e Semântica (15 elementos)</h2>
+<table id="table-text">
+<thead>
+<tr><th>Elemento</th><th>Descrição</th><th>Exemplo</th></tr>
+</thead>
+<tbody>
+<tr><td>&lt;h1&gt; - &lt;h6&gt;</td><td>Títulos (6 níveis)</td><td><code>&lt;h1&gt;Título Principal&lt;/h1&gt;</code></td></tr>
+<tr><td>&lt;p&gt;</td><td>Parágrafo</td><td><code>&lt;p&gt;Texto do parágrafo&lt;/p&gt;</code></td></tr>
+<tr><td>&lt;strong&gt;</td><td>Texto forte (importante)</td><td><code>&lt;strong&gt;Importante&lt;/strong&gt;</code></td></tr>
+<tr><td>&lt;em&gt;</td><td>Ênfase</td><td><code>&lt;em&gt;Ênfase&lt;/em&gt;</code></td></tr>
+<tr><td>&lt;mark&gt;</td><td>Destaque (highlighter)</td><td><code>&lt;mark&gt;Destacado&lt;/mark&gt;</code></td></tr>
+<tr><td>&lt;small&gt;</td><td>Texto pequeno</td><td><code>&lt;small&gt;Pequeno&lt;/small&gt;</code></td></tr>
+<tr><td>&lt;del&gt;</td><td>Texto deletado</td><td><code>&lt;del&gt;Removido&lt;/del&gt;</code></td></tr>
+<tr><td>&lt;ins&gt;</td><td>Texto inserido</td><td><code>&lt;ins&gt;Novo&lt;/ins&gt;</code></td></tr>
+<tr><td>&lt;sub&gt;</td><td>Subscrito</td><td><code>H&lt;sub&gt;2&lt;/sub&gt;O</code></td></tr>
+<tr><td>&lt;sup&gt;</td><td>Sobrescrito</td><td><code>x&lt;sup&gt;2&lt;/sup&gt;</code></td></tr>
+<tr><td>&lt;code&gt;</td><td>Código inline</td><td><code>&lt;code&gt;var x = 10;&lt;/code&gt;</code></td></tr>
+<tr><td>&lt;pre&gt;</td><td>Texto pré-formatado</td><td><code>&lt;pre&gt;Espaços preservados&lt;/pre&gt;</code></td></tr>
+<tr><td>&lt;kbd&gt;</td><td>Entrada de teclado</td><td><code>&lt;kbd&gt;Ctrl+C&lt;/kbd&gt;</code></td></tr>
+<tr><td>&lt;var&gt;</td><td>Variável</td><td><code>&lt;var&gt;x&lt;/var&gt; = 10</code></td></tr>
+<tr><td>&lt;samp&gt;</td><td>Saída de programa</td><td><code>&lt;samp&gt;Resultado&lt;/samp&gt;</code></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="section">
+<h2 class="section-title">3. Listas (5 elementos)</h2>
+<table id="table-lists">
+<thead>
+<tr><th>Elemento</th><th>Descrição</th><th>Exemplo</th></tr>
+</thead>
+<tbody>
+<tr><td>&lt;ul&gt;</td><td>Lista não ordenada (bullets)</td><td><code>&lt;ul&gt;&lt;li&gt;Item&lt;/li&gt;&lt;/ul&gt;</code></td></tr>
+<tr><td>&lt;ol&gt;</td><td>Lista ordenada (numerada)</td><td><code>&lt;ol&gt;&lt;li&gt;Item&lt;/li&gt;&lt;/ol&gt;</code></td></tr>
+<tr><td>&lt;li&gt;</td><td>Item de lista</td><td><code>&lt;li&gt;Item da lista&lt;/li&gt;</code></td></tr>
+<tr><td>&lt;dl&gt;</td><td>Lista de descrições</td><td><code>&lt;dl&gt;&lt;dt&gt;Termo&lt;/dt&gt;&lt;/dl&gt;</code></td></tr>
+<tr><td>&lt;dt&gt; / &lt;dd&gt;</td><td>Termo e definição</td><td><code>&lt;dt&gt;Termo&lt;/dt&gt;&lt;dd&gt;Definição&lt;/dd&gt;</code></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="section">
+<h2 class="section-title">4. Tabelas (8 elementos)</h2>
+<table id="table-tables">
+<thead>
+<tr><th>Elemento</th><th>Descrição</th><th>Exemplo</th></tr>
+</thead>
+<tbody>
+<tr><td>&lt;table&gt;</td><td>Tabela</td><td><code>&lt;table&gt;...&lt;/table&gt;</code></td></tr>
+<tr><td>&lt;thead&gt;</td><td>Cabeçalho da tabela</td><td><code>&lt;thead&gt;...&lt;/thead&gt;</code></td></tr>
+<tr><td>&lt;tbody&gt;</td><td>Corpo da tabela</td><td><code>&lt;tbody&gt;...&lt;/tbody&gt;</code></td></tr>
+<tr><td>&lt;tfoot&gt;</td><td>Rodapé da tabela</td><td><code>&lt;tfoot&gt;...&lt;/tfoot&gt;</code></td></tr>
+<tr><td>&lt;tr&gt;</td><td>Linha da tabela</td><td><code>&lt;tr&gt;...&lt;/tr&gt;</code></td></tr>
+<tr><td>&lt;th&gt;</td><td>Célula de cabeçalho</td><td><code>&lt;th&gt;Cabeçalho&lt;/th&gt;</code></td></tr>
+<tr><td>&lt;td&gt;</td><td>Célula de dados</td><td><code>&lt;td&gt;Dados&lt;/td&gt;</code></td></tr>
+<tr><td>&lt;caption&gt;</td><td>Legenda da tabela</td><td><code>&lt;caption&gt;Título&lt;/caption&gt;</code></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="section">
+<h2 class="section-title">5. Formulários (18 elementos)</h2>
+<table id="table-forms">
+<thead>
+<tr><th>Elemento</th><th>Descrição</th><th>Exemplo</th></tr>
+</thead>
+<tbody>
+<tr><td>&lt;form&gt;</td><td>Formulário</td><td><code>&lt;form action="send.php"&gt;&lt;/form&gt;</code></td></tr>
+<tr><td>&lt;input&gt;</td><td>Campo de entrada</td><td><code>&lt;input type="text"&gt;</code></td></tr>
+<tr><td>&lt;textarea&gt;</td><td>Área de texto</td><td><code>&lt;textarea rows="5"&gt;&lt;/textarea&gt;</code></td></tr>
+<tr><td>&lt;button&gt;</td><td>Botão</td><td><code>&lt;button&gt;Enviar&lt;/button&gt;</code></td></tr>
+<tr><td>&lt;select&gt;</td><td>Caixa de seleção</td><td><code>&lt;select&gt;&lt;option&gt;...&lt;/select&gt;</code></td></tr>
+<tr><td>&lt;option&gt;</td><td>Opção em select</td><td><code>&lt;option value="1"&gt;Opção&lt;/option&gt;</code></td></tr>
+<tr><td>&lt;label&gt;</td><td>Rótulo de campo</td><td><code>&lt;label for="id"&gt;Nome&lt;/label&gt;</code></td></tr>
+<tr><td>&lt;fieldset&gt;</td><td>Agrupamento de campos</td><td><code>&lt;fieldset&gt;...&lt;/fieldset&gt;</code></td></tr>
+<tr><td>&lt;legend&gt;</td><td>Legenda do grupo</td><td><code>&lt;legend&gt;Informações&lt;/legend&gt;</code></td></tr>
+<tr><td>&lt;datalist&gt;</td><td>Lista de dados</td><td><code>&lt;datalist id="d"&gt;...&lt;/datalist&gt;</code></td></tr>
+<tr><td>&lt;output&gt;</td><td>Resultado de cálculo</td><td><code>&lt;output&gt;Resultado&lt;/output&gt;</code></td></tr>
+<tr><td>&lt;progress&gt;</td><td>Barra de progresso</td><td><code>&lt;progress value="70" max="100"&gt;&lt;/progress&gt;</code></td></tr>
+<tr><td>&lt;meter&gt;</td><td>Medida/gauge</td><td><code>&lt;meter value="6" min="0" max="10"&gt;&lt;/meter&gt;</code></td></tr>
+<tr><td>input type="email"</td><td>Campo de email</td><td><code>&lt;input type="email"&gt;</code></td></tr>
+<tr><td>input type="number"</td><td>Campo numérico</td><td><code>&lt;input type="number"&gt;</code></td></tr>
+<tr><td>input type="date"</td><td>Seletor de data</td><td><code>&lt;input type="date"&gt;</code></td></tr>
+<tr><td>input type="color"</td><td>Seletor de cor</td><td><code>&lt;input type="color"&gt;</code></td></tr>
+<tr><td>input type="range"</td><td>Controle de intervalo</td><td><code>&lt;input type="range"&gt;</code></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="section">
+<h2 class="section-title">6. Mídia (10 elementos)</h2>
+<table id="table-media">
+<thead>
+<tr><th>Elemento</th><th>Descrição</th><th>Exemplo</th></tr>
+</thead>
+<tbody>
+<tr><td>&lt;img&gt;</td><td>Imagem</td><td><code>&lt;img src="image.jpg" alt="Descrição"&gt;</code></td></tr>
+<tr><td>&lt;picture&gt;</td><td>Imagem responsiva</td><td><code>&lt;picture&gt;...&lt;/picture&gt;</code></td></tr>
+<tr><td>&lt;source&gt;</td><td>Fonte de mídia</td><td><code>&lt;source src="video.mp4" type="video/mp4"&gt;</code></td></tr>
+<tr><td>&lt;audio&gt;</td><td>Áudio</td><td><code>&lt;audio controls&gt;&lt;/audio&gt;</code></td></tr>
+<tr><td>&lt;video&gt;</td><td>Vídeo</td><td><code>&lt;video controls width="320"&gt;&lt;/video&gt;</code></td></tr>
+<tr><td>&lt;track&gt;</td><td>Legenda/subtítulos de vídeo</td><td><code>&lt;track kind="captions" src="sub.vtt"&gt;</code></td></tr>
+<tr><td>&lt;svg&gt;</td><td>Gráficos vetoriais</td><td><code>&lt;svg&gt;&lt;circle&gt;&lt;/svg&gt;</code></td></tr>
+<tr><td>&lt;canvas&gt;</td><td>Desenho 2D</td><td><code>&lt;canvas id="c"&gt;&lt;/canvas&gt;</code></td></tr>
+<tr><td>&lt;figure&gt;</td><td>Figura/ilustração</td><td><code>&lt;figure&gt;...&lt;/figure&gt;</code></td></tr>
+<tr><td>&lt;figcaption&gt;</td><td>Legenda da figura</td><td><code>&lt;figcaption&gt;Legenda&lt;/figcaption&gt;</code></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="section">
+<h2 class="section-title">7. Links e Navegação (8 elementos)</h2>
+<table id="table-nav">
+<thead>
+<tr><th>Elemento</th><th>Descrição</th><th>Exemplo</th></tr>
+</thead>
+<tbody>
+<tr><td>&lt;a&gt;</td><td>Link/âncora</td><td><code>&lt;a href="page.html"&gt;Link&lt;/a&gt;</code></td></tr>
+<tr><td>&lt;nav&gt;</td><td>Navegação</td><td><code>&lt;nav&gt;...&lt;/nav&gt;</code></td></tr>
+<tr><td>&lt;menu&gt;</td><td>Menu</td><td><code>&lt;menu&gt;...&lt;/menu&gt;</code></td></tr>
+<tr><td>&lt;details&gt;</td><td>Detalhes expansível</td><td><code>&lt;details open&gt;...&lt;/details&gt;</code></td></tr>
+<tr><td>&lt;summary&gt;</td><td>Resumo de details</td><td><code>&lt;summary&gt;Título&lt;/summary&gt;</code></td></tr>
+<tr><td>&lt;dialog&gt;</td><td>Caixa de diálogo modal</td><td><code>&lt;dialog open&gt;...&lt;/dialog&gt;</code></td></tr>
+<tr><td>&lt;breadcrumb&gt;</td><td>Navegação breadcrumb</td><td><code>&lt;nav aria-label="breadcrumb"&gt;...&lt;/nav&gt;</code></td></tr>
+<tr><td>&lt;sitemap&gt;</td><td>Mapa do site</td><td><code>&lt;nav role="navigation"&gt;...&lt;/nav&gt;</code></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="section">
+<h2 class="section-title">8. Seções e Layout (15 elementos)</h2>
+<table id="table-layout">
+<thead>
+<tr><th>Elemento</th><th>Descrição</th><th>Exemplo</th></tr>
+</thead>
+<tbody>
+<tr><td>&lt;div&gt;</td><td>Divisão genérica</td><td><code>&lt;div class="container"&gt;&lt;/div&gt;</code></td></tr>
+<tr><td>&lt;section&gt;</td><td>Seção temática</td><td><code>&lt;section&gt;...&lt;/section&gt;</code></td></tr>
+<tr><td>&lt;article&gt;</td><td>Artigo independente</td><td><code>&lt;article&gt;...&lt;/article&gt;</code></td></tr>
+<tr><td>&lt;aside&gt;</td><td>Conteúdo lateral</td><td><code>&lt;aside&gt;...&lt;/aside&gt;</code></td></tr>
+<tr><td>&lt;header&gt;</td><td>Cabeçalho</td><td><code>&lt;header&gt;...&lt;/header&gt;</code></td></tr>
+<tr><td>&lt;footer&gt;</td><td>Rodapé</td><td><code>&lt;footer&gt;...&lt;/footer&gt;</code></td></tr>
+<tr><td>&lt;main&gt;</td><td>Conteúdo principal</td><td><code>&lt;main&gt;...&lt;/main&gt;</code></td></tr>
+<tr><td>&lt;address&gt;</td><td>Endereço/contato</td><td><code>&lt;address&gt;...&lt;/address&gt;</code></td></tr>
+<tr><td>&lt;blockquote&gt;</td><td>Citação em bloco</td><td><code>&lt;blockquote cite="url"&gt;Citação&lt;/blockquote&gt;</code></td></tr>
+<tr><td>&lt;q&gt;</td><td>Citação inline</td><td><code>&lt;q&gt;Citação&lt;/q&gt;</code></td></tr>
+<tr><td>&lt;cite&gt;</td><td>Referência/fonte</td><td><code>&lt;cite&gt;Fonte&lt;/cite&gt;</code></td></tr>
+<tr><td>&lt;time&gt;</td><td>Data e hora</td><td><code>&lt;time datetime="2026-02-28"&gt;28/02&lt;/time&gt;</code></td></tr>
+<tr><td>&lt;span&gt;</td><td>Espaço inline genérico</td><td><code>&lt;span class="highlight"&gt;Texto&lt;/span&gt;</code></td></tr>
+<tr><td>&lt;hr&gt;</td><td>Separador horizontal</td><td><code>&lt;hr&gt;</code></td></tr>
+<tr><td>&lt;br&gt;</td><td>Quebra de linha</td><td><code>&lt;br&gt;</code></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="section">
+<h2 class="section-title">9. Atributos Globais (14 atributos)</h2>
+<table id="table-attrs">
+<thead>
+<tr><th>Atributo</th><th>Descrição</th><th>Exemplo</th></tr>
+</thead>
+<tbody>
+<tr><td>id</td><td>Identificador único</td><td><code>&lt;div id="header"&gt;&lt;/div&gt;</code></td></tr>
+<tr><td>class</td><td>Classe CSS</td><td><code>&lt;div class="box active"&gt;&lt;/div&gt;</code></td></tr>
+<tr><td>style</td><td>CSS inline</td><td><code>&lt;div style="color: red;"&gt;&lt;/div&gt;</code></td></tr>
+<tr><td>title</td><td>Dica tooltip</td><td><code>&lt;div title="Dica"&gt;&lt;/div&gt;</code></td></tr>
+<tr><td>data-*</td><td>Atributo customizado</td><td><code>&lt;div data-value="123"&gt;&lt;/div&gt;</code></td></tr>
+<tr><td>lang</td><td>Idioma</td><td><code>&lt;div lang="pt-BR"&gt;&lt;/div&gt;</code></td></tr>
+<tr><td>dir</td><td>Direção do texto (ltr/rtl)</td><td><code>&lt;div dir="ltr"&gt;&lt;/div&gt;</code></td></tr>
+<tr><td>hidden</td><td>Oculta elemento</td><td><code>&lt;div hidden&gt;&lt;/div&gt;</code></td></tr>
+<tr><td>tabindex</td><td>Ordem de tabulação</td><td><code>&lt;div tabindex="1"&gt;&lt;/div&gt;</code></td></tr>
+<tr><td>contenteditable</td><td>Torna editável</td><td><code>&lt;div contenteditable&gt;&lt;/div&gt;</code></td></tr>
+<tr><td>draggable</td><td>Permite arrastar</td><td><code>&lt;div draggable="true"&gt;&lt;/div&gt;</code></td></tr>
+<tr><td>aria-*</td><td>Acessibilidade</td><td><code>&lt;div aria-label="Descrição"&gt;&lt;/div&gt;</code></td></tr>
+<tr><td>role</td><td>Papel semântico</td><td><code>&lt;div role="button"&gt;&lt;/div&gt;</code></td></tr>
+<tr><td>translate</td><td>Traduzível</td><td><code>&lt;div translate="no"&gt;&lt;/div&gt;</code></td></tr>
+</tbody>
+</table>
+</div>
+
+</div>
+<div class="section">
+<h2 class="section-title">9. Estruturas de Controle (11 instruções)</h2>
+<table>
+<thead>
+<tr><th>Instrução</th><th>Descrição</th><th>Exemplo</th></tr>
+</thead>
+<tbody>
+<tr><td>if</td><td>Executa bloco se condição for verdadeira</td><td><code>if (x > 0) {}</code></td></tr>
+<tr><td>else</td><td>Executa se condição for falsa</td><td><code>else {}</code></td></tr>
+<tr><td>else if</td><td>Testa nova condição</td><td><code>else if (x === 0) {}</code></td></tr>
+<tr><td>switch</td><td>Estrutura de múltiplos casos</td><td><code>switch(x) { case 1: break; }</code></td></tr>
+<tr><td>case</td><td>Define caso no switch</td><td><code>case 1:</code></td></tr>
+<tr><td>default</td><td>Caso padrão</td><td><code>default:</code></td></tr>
+<tr><td>for</td><td>Laço tradicional</td><td><code>for(let i=0;i<5;i++){}</code></td></tr>
+<tr><td>while</td><td>Laço enquanto verdadeiro</td><td><code>while(x < 5){}</code></td></tr>
+<tr><td>do...while</td><td>Executa ao menos uma vez</td><td><code>do{}while(x<5)</code></td></tr>
+<tr><td>break</td><td>Interrompe execução</td><td><code>break;</code></td></tr>
+<tr><td>continue</td><td>Pula para próxima iteração</td><td><code>continue;</code></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="section">
+<h2 class="section-title">10. Declarações e Variáveis (12 instruções)</h2>
+<table>
+<thead>
+<tr><th>Instrução</th><th>Descrição</th><th>Exemplo</th></tr>
+</thead>
+<tbody>
+<tr><td>var</td><td>Declara variável (escopo função)</td><td><code>var x = 10</code></td></tr>
+<tr><td>let</td><td>Declara variável (escopo bloco)</td><td><code>let x = 10</code></td></tr>
+<tr><td>const</td><td>Declara constante</td><td><code>const PI = 3.14</code></td></tr>
+<tr><td>function</td><td>Declara função</td><td><code>function soma(){}</code></td></tr>
+<tr><td>return</td><td>Retorna valor</td><td><code>return x</code></td></tr>
+<tr><td>class</td><td>Declara classe</td><td><code>class Pessoa {}</code></td></tr>
+<tr><td>constructor</td><td>Método construtor</td><td><code>constructor(nome){}</code></td></tr>
+<tr><td>extends</td><td>Herança entre classes</td><td><code>class Filho extends Pai {}</code></td></tr>
+<tr><td>super</td><td>Chama construtor pai</td><td><code>super()</code></td></tr>
+<tr><td>import</td><td>Importa módulo</td><td><code>import x from './mod.js'</code></td></tr>
+<tr><td>export</td><td>Exporta módulo</td><td><code>export default fn</code></td></tr>
+<tr><td>new</td><td>Cria instância</td><td><code>new Pessoa()</code></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="section">
+<h2 class="section-title">11. Operadores (22 operadores)</h2>
+<table>
+<thead>
+<tr><th>Operador</th><th>Descrição</th><th>Exemplo</th></tr>
+</thead>
+<tbody>
+<tr><td>=</td><td>Atribuição</td><td><code>x = 5</code></td></tr>
+<tr><td>==</td><td>Compara valor</td><td><code>x == 5</code></td></tr>
+<tr><td>===</td><td>Compara valor e tipo</td><td><code>x === 5</code></td></tr>
+<tr><td>!=</td><td>Diferente (valor)</td><td><code>x != 5</code></td></tr>
+<tr><td>!==</td><td>Diferente (valor e tipo)</td><td><code>x !== 5</code></td></tr>
+<tr><td>&gt;</td><td>Maior que</td><td><code>x &gt; 5</code></td></tr>
+<tr><td>&lt;</td><td>Menor que</td><td><code>x &lt; 5</code></td></tr>
+<tr><td>&gt;=</td><td>Maior ou igual</td><td><code>x &gt;= 5</code></td></tr>
+<tr><td>&lt;=</td><td>Menor ou igual</td><td><code>x &lt;= 5</code></td></tr>
+<tr><td>&amp;&amp;</td><td>E lógico</td><td><code>x &gt; 1 &amp;&amp; x &lt; 10</code></td></tr>
+<tr><td>||</td><td>OU lógico</td><td><code>x &gt; 1 || x &lt; 0</code></td></tr>
+<tr><td>!</td><td>Negação</td><td><code>!true</code></td></tr>
+<tr><td>++</td><td>Incremento</td><td><code>x++</code></td></tr>
+<tr><td>--</td><td>Decremento</td><td><code>x--</code></td></tr>
+<tr><td>+</td><td>Soma/Concatenação</td><td><code>a + b</code></td></tr>
+<tr><td>-</td><td>Subtração</td><td><code>a - b</code></td></tr>
+<tr><td>*</td><td>Multiplicação</td><td><code>a * b</code></td></tr>
+<tr><td>/</td><td>Divisão</td><td><code>a / b</code></td></tr>
+<tr><td>%</td><td>Resto da divisão</td><td><code>a % 2</code></td></tr>
+<tr><td>**</td><td>Potência</td><td><code>2 ** 3</code></td></tr>
+<tr><td>typeof</td><td>Retorna tipo</td><td><code>typeof x</code></td></tr>
+<tr><td>instanceof</td><td>Verifica instância</td><td><code>obj instanceof Pessoa</code></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="section">
+<h2 class="section-title">12. Tratamento de Erros (5 instruções)</h2>
+<table>
+<thead>
+<tr><th>Instrução</th><th>Descrição</th><th>Exemplo</th></tr>
+</thead>
+<tbody>
+<tr><td>try</td><td>Bloco para testar código que pode gerar erro</td><td><code>try { codigo(); }</code></td></tr>
+<tr><td>catch</td><td>Captura e trata o erro</td><td><code>catch(e) { console.log(e); }</code></td></tr>
+<tr><td>finally</td><td>Executa sempre, com erro ou não</td><td><code>finally { limpar(); }</code></td></tr>
+<tr><td>throw</td><td>Lança erro manualmente</td><td><code>throw new Error("Erro")</code></td></tr>
+<tr><td>Error</td><td>Objeto padrão de erro</td><td><code>new Error("Mensagem")</code></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="section">
+<h2 class="section-title">13. Tipos Primitivos (7 tipos)</h2>
+<table>
+<thead>
+<tr><th>Tipo</th><th>Descrição</th><th>Exemplo</th></tr>
+</thead>
+<tbody>
+<tr><td>string</td><td>Representa texto</td><td><code>"Olá mundo"</code></td></tr>
+<tr><td>number</td><td>Representa números</td><td><code>10</code></td></tr>
+<tr><td>boolean</td><td>Verdadeiro ou falso</td><td><code>true</code></td></tr>
+<tr><td>null</td><td>Valor vazio intencional</td><td><code>null</code></td></tr>
+<tr><td>undefined</td><td>Variável não definida</td><td><code>let x;</code></td></tr>
+<tr><td>symbol</td><td>Identificador único</td><td><code>Symbol()</code></td></tr>
+<tr><td>bigint</td><td>Números inteiros muito grandes</td><td><code>10n</code></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="footer">
+<strong>🔒 ARQUIVO EXCLUSIVO</strong> | Desenvolvido por <strong> © 2026 Julia Correia de Oliveira. Todos os direitos reservados.</strong> | Versão 1.0 Professional Edition<br>
+Data: 28 de Fevereiro de 2026 | Licenciado para uso individual. O compartilhamento não autorizado poderá resultar no bloqueio de acesso. .
+</div>
+</div>
+
+<script>
+function filterTable() {
+  const searchInput = document.getElementById('search').value.toLowerCase();
+  const tables = document.querySelectorAll('table');
+
+  tables.forEach(table => {
+    const rows = table.querySelectorAll('tbody tr');
+    rows.forEach(row => {
+      const text = row.textContent.toLowerCase();
+      row.style.display = text.includes(searchInput) ? '' : 'none';
+    });
+  });
+}
+</script>
+<script>
+const params = new URLSearchParams(window.location.search);
+const nome = params.get("nome");
+
+if (nome) {
+  const aviso = document.createElement("div");
+  aviso.innerHTML = "ARQUIVO LICENCIADO PARA: " + nome + " | Uso individual.";
+  
+  aviso.style.position = "fixed";
+  aviso.style.top = "0";
+  aviso.style.left = "0";
+  aviso.style.width = "100%";
+  aviso.style.background = "linear-gradient(135deg,#c7254e 0%,#764ba2 100%)";
+  aviso.style.color = "#fff";
+  aviso.style.padding = "12px";
+  aviso.style.textAlign = "center";
+  aviso.style.fontWeight = "bold";
+  aviso.style.zIndex = "9999";
+  aviso.style.boxShadow = "0 4px 10px rgba(0,0,0,0.2)";
+  
+  document.body.style.paddingTop = "60px";
+  document.body.prepend(aviso);
+}
+</script>
+
+</body>
+</html>
